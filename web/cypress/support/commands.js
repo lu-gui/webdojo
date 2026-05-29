@@ -1,48 +1,44 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
-
 
 Cypress.Commands.add('start', () => {
-    cy.viewport(1440, 900)
-    cy.visit('http://localhost:3000')
+  cy.viewport(1440, 900)
+  cy.visit('http://localhost:3000')
 
 })
+
 Cypress.Commands.add('submitLoginForm', (email, senha) => {
 
-    cy.get('#email').type(email)
-    cy.get('#password').type(senha)
-
-    cy.contains('button', 'Entrar').click()
+  cy.get('#email').type(email)
+  cy.get('#password').type(senha)
+  cy.contains('button', 'Entrar').click()
 
 })
+
 Cypress.Commands.add('goTo', (buttonName, pageTitle) => {
   cy.contains('button', buttonName)
     .should('be.visible')
     .click()
-    
-  cy.contains('h1', pageTitle) 
+
+  cy.contains('h1', pageTitle)
+    .should('be.visible')
+
 })
+
+Cypress.Commands.add('preencherdados', (pageTitle, name, email, 
+  phone, document, tipoconsultoria) => {
+  cy.contains('h1', pageTitle)
+    .should('be.visible')
+
+  cy.get('#name').type(name)
+  cy.get('#email').type(email)
+  cy.get('#phone').type(phone)
+  cy.get('#document').type(document)
+  cy.get('#consultancyType').select(tipoconsultoria)
+
+ 
+
+  ////span[text()="Pessoa Física"]/..//input
+
+})
+
+
+
